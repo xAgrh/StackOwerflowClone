@@ -1,0 +1,51 @@
+commit fd21957ba6f6ee6ddc2b0a47330581a1edff703b
+Author: xAgrh <obsnrd@gmail.com>
+Date:   Sun May 11 00:40:10 2014 +0400
+
+    Revert "Revert "Bootstraped. Learning some slim2""
+    
+    This reverts commit 18fc648fb5b2830e619d555831f348179fb4cee1.
+
+commit 18fc648fb5b2830e619d555831f348179fb4cee1
+Author: xAgrh <obsnrd@gmail.com>
+Date:   Sun May 11 00:39:50 2014 +0400
+
+    Revert "Bootstraped. Learning some slim2"
+    
+    This reverts commit 5f51b7edd008caf6ccbf6bc91e0eb22ff78771ba.
+
+commit 5f51b7edd008caf6ccbf6bc91e0eb22ff78771ba
+Author: xAgrh <obsnrd@gmail.com>
+Date:   Sat May 10 16:06:25 2014 +0400
+
+    Bootstraped. Learning some slim2
+
+commit 17ed12dd8cc99b73cddd0d1360bea1ee59dc7bc7
+Author: xAgrh <obsnrd@gmail.com>
+Date:   Sat May 10 16:03:55 2014 +0400
+
+    Bootstraped. Learning some slim
+
+commit 100a3091160f7d4acd260aa69d5a3614a748303f
+Author: xAgrh <obsnrd@gmail.com>
+Date:   Sat May 10 01:41:49 2014 +0400
+
+    Reg. User model. Devise. part1
+
+commit 9f0c92cfcdf401aa22a8bc2984059da2a7d9637f
+Author: xAgrh <obsnrd@gmail.com>
+Date:   Thu May 8 16:57:34 2014 +0400
+
+    Закончил тесты экшенов контроллера Question
+
+commit 580c2c928d59a14e4418dc89e68bf8c01034d5f5
+Author: xAgrh <obsnrd@gmail.com>
+Date:   Thu May 8 12:30:54 2014 +0400
+
+    Настроил окружение, добавил модель и контроллер для вопросов, покрыл тестами
+
+commit 3847e90d04a22f863a3ee67d113644fc329d734e
+Author: xAgrh <obsnrd@gmail.com>
+Date:   Mon May 5 16:13:01 2014 +0400
+
+    Initial commit
