@@ -10,7 +10,7 @@ feature 'Sign in', %q{
   
   scenario "Existing User try to sign in" do
     sign_in(user)
-    expect(page).to have_content 'Signed in successfully.'
+    expect(page).to have_content 'Вход в систему выполнен.'
   end
   
   scenario "Non-existing user try to sign in" do
@@ -19,6 +19,6 @@ feature 'Sign in', %q{
     fill_in 'Password', with: '12345'
     click_on 'Sign in'
     
-    expect(page).to have_content 'Invalid email or password.'
+    expect(page).to have_content 'Неверный email или пароль.'
   end
 end
