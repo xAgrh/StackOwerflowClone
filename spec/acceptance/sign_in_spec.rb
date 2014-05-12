@@ -13,6 +13,16 @@ feature 'Sign in', %q{
     expect(page).to have_content 'Вход в систему выполнен.'
   end
   
+  scenario "Existing User try to sign in with invalid password" do
+    visit new_user_session_path
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: 'wrongpassword'
+    click_on 'Sign in'
+    
+    expect(page).to have_content 'Неверный email или пароль.'
+    
+  end
+  
   scenario "Non-existing user try to sign in" do
     visit new_user_session_path
     fill_in 'Email', with: 'wronguser@test.com'
