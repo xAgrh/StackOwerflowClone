@@ -10,8 +10,14 @@ div class="center hero-unit"
 div 
   p Recent questions
   
-- @questions.each_with_index do |question, i|
-  li
-    span #{i+1}
-    = link_to "#{question.title}", question
-    = question.body
+- @questions.each_with_index do |question|
+  div class="panel panel-default"
+    div class="panel-heading"
+      h3 class="panel-title"
+        = link_to "#{question.title}", question
+    div class="panel-body"
+      = question.body
+      = link_to 'Подробно', question
+    
+    
+ 

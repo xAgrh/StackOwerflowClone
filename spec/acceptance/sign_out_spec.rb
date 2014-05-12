@@ -10,10 +10,8 @@ feature 'Sign out', %q{
   
   scenario "Existing User try to sign out" do
     sign_in(user)
-    save_and_open_page
-    click_on 'Sign out'
-    
-    save_and_open_page
+    click_on 'Sign out' 
+
     expect(page).to have_content 'Выход из системы выполнен.'
   end
   
