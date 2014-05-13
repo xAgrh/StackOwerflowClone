@@ -1,1 +1,18 @@
- 
+div class="panel panel-default"
+  div class="panel-heading"
+    h3 class="panel-title"
+      = @question.title
+  div class="panel-body"
+    = @question.body
+    
+div class="panel panel-default"
+  div class="panel-body"
+    = form_for [@question, @answer] do |f|
+      = f.label :body, 'Your answer'
+      = f.text_area :body
+      = f.submit 'Create'
+    
+      
+= link_to 'Назад', root_path
+    
+    

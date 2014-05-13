@@ -24,6 +24,10 @@ describe QuestionsController do
       expect(assigns(:question)).to eq question
     end
     
+    it 'assigns new answer for question' do
+      expect(assigns(:answer)).to be_a_new(Answer)
+    end
+    
     it 'renders show view' do
       expect(response).to render_template :show
     end
@@ -122,7 +126,7 @@ describe QuestionsController do
     end
     
     it 'redirect to index view' do
-      delete :destroy, id: question
+      delete :destroy, id: question 
       expect(response).to redirect_to questions_path
     end
   end

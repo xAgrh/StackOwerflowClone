@@ -35,6 +35,10 @@ group :test, :developement do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
+  gem 'guard-rspec'
+  gem 'spring-commands-rspec'
+  gem 'childprocess', '0.3.6'
+
 end
 
 group :test do
