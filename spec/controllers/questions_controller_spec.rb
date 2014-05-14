@@ -3,11 +3,11 @@ require 'spec_helper'
 describe QuestionsController do
   let(:question) { create (:question) }  
   
+  
   describe 'GET #index' do
-    let(:questions) { create_list(:question, 2) }
-    
+    let(:questions) { create_list(:question, 2) }  
     before { get :index }
-    
+
     it 'populates an array of all questions' do     
       expect(assigns(:questions)).to match_array(questions)
     end
@@ -34,7 +34,6 @@ describe QuestionsController do
   end
   
   describe 'GET #new' do
-    
     login_user
         
     before { get :new }

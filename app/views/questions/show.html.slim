@@ -6,12 +6,11 @@ div class="panel panel-default"
     = @question.body
     
 .answers
-  - @question.answers.each do |answer|
-    p = answer.body 
+  = render 'answers'
     
 div class="panel panel-default"
   div class="panel-body"
-    = form_for [@question, @answer] do |f|
+    = form_for [@question, @answer], remote: true do |f|
       = f.label :body, 'Your answer'
       = f.text_area :body
       = f.submit 'Create'

@@ -5,8 +5,8 @@ describe StaticPagesController do
   it {should route(:get, '/').to(controller: 'static_pages', action: 'home')}
   
   describe "GET 'home'" do
-    let(:questions){ create_list(:question, 5) }
-    let(:deleted_questions){ create_list(:deleted_question, 5) }
+    let(:questions){ create_list(:question, 2) }
+    let(:deleted_questions){ create_list(:deleted_question, 2) }
     
     before {get :home}
     
