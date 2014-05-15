@@ -39,8 +39,8 @@ group :test, :developement do
   gem 'spring-commands-rspec'
   gem 'childprocess', '0.3.6'
   gem 'libnotify', '0.8.0'
-  gem 'selenium-webdriver'
   gem 'database_cleaner'
+  gem 'capybara-webkit'
 end
 
 group :test do

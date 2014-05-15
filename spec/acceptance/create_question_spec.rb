@@ -1,5 +1,5 @@
  
-require 'spec_helper'
+require_relative 'acceptance_helper'
 
 feature 'Create question', %q{
   In order to get answer from community
