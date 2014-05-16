@@ -1,9 +1,12 @@
+
+
 div class="panel panel-default"
   div class="panel-heading"
     h3 class="panel-title"
       = @question.title
   div class="panel-body"
     = @question.body
+    = link_to 'Edit question', edit_question_path, class: "btn btn-large btn-primary"
     
 .answers
   = render 'answers'
