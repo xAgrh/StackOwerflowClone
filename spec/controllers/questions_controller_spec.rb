@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe QuestionsController do
   let(:question) { create (:question) }  
-  
+  let(:user) { create :user }
   
   describe 'GET #index' do
     let(:questions) { create_list(:question, 2) }  
@@ -48,6 +48,7 @@ describe QuestionsController do
   end
   
   describe 'GET #edit' do
+    login_user
     before {get :edit, id: question }
     
     it 'assigns the requested question to @question' do
@@ -65,16 +66,15 @@ describe QuestionsController do
         
     context 'with valid attributes' do
       it 'saves the new question in database' do
-        expect { post :create, question: attributes_for(:question) }.to change(Question, :count).by(1)
+        expect { post :create, question: attributes_for(:question), user_id: user }.to change(Question, :count).by(1)
       end
-      it 'redirects to show view' do
-        post :create, question: attributes_for(:question)
+      it 'redirects to created question' do
+        post :create, question: attributes_for(:question), user_id: user
 	expect(response).to redirect_to question_path(assigns(:question))
       end
       
-      it 'assigns the user to a new question' do
-        post :create, question: attributes_for(:question)
-	expect(assigns(:question).user).to eq @user
+      it 'saves new question to user.question' do
+        expect { post :create, question: attributes_for(:question), user_id: user }.to change(user.questions, :count).by(1)
       end
       
       
@@ -82,10 +82,10 @@ describe QuestionsController do
     
     context 'with invalid attributes' do
       it 'does not save the question' do
-	expect { post :create, question: attributes_for(:invalid_question) }.to_not change(Question, :count)
+	expect { post :create, question: attributes_for(:invalid_question), user_id: user }.to_not change(Question, :count)
       end
       it 're-renders new view' do
-        post :create, question: attributes_for(:invalid_question)
+        post :create, question: attributes_for(:invalid_question), user_id: user
 	expect(response).to render_template :new
       end
     end
@@ -93,6 +93,7 @@ describe QuestionsController do
   end
   
   describe 'PATCH #update' do
+    login_user
     context 'valid attributes' do
       it 'assigns the requested question to @question' do
 	patch :update, id: question, question: attributes_for(:question)

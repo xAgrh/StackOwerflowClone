@@ -15,8 +15,8 @@ describe AnswersController do
 	expect(response).to render_template :create
       end
       
-      it 'assigns current user to answer'
-        post :create, answer: attributes_for(:answer), question_id: question, format: js
+      it 'assigns current user to answer' do
+        post :create, answer: attributes_for(:answer), question_id: question, format: :js
 	expect(assigns(:answer).user).to eq @user
       end
       

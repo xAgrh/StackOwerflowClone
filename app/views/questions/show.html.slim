@@ -6,7 +6,10 @@ div class="panel panel-default"
       = @question.title
   div class="panel-body"
     = @question.body
-    = link_to 'Edit question', edit_question_path, class: "btn btn-large btn-primary"
+    - if @question.user == current_user
+      = link_to 'Редактировать', edit_question_path(@question), class: "btn btn-large btn-primary"
+      
+     
     
 .answers
   = render 'answers'
