@@ -63,7 +63,7 @@ describe QuestionsController do
     
     login_user
         
-    context 'POST #create with valid attributes' do
+    context 'with valid attributes' do
       it 'saves the new question in database' do
         expect { post :create, question: attributes_for(:question) }.to change(Question, :count).by(1)
       end
@@ -71,6 +71,13 @@ describe QuestionsController do
         post :create, question: attributes_for(:question)
 	expect(response).to redirect_to question_path(assigns(:question))
       end
+      
+      it 'assigns the user to a new question' do
+        post :create, question: attributes_for(:question)
+	expect(assigns(:question).user).to eq @user
+      end
+      
+      
     end
     
     context 'with invalid attributes' do

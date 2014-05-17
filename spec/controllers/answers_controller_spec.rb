@@ -4,7 +4,9 @@ describe AnswersController do
   let!(:question) { create :question }
    
   describe 'POST #create' do
-    context 'POST #create with valid attributes' do
+    context 'with valid attributes' do
+      login_user
+      
       it 'saves the new answer in database' do
         expect { post :create, answer: attributes_for(:answer), question_id: question, format: :js }.to change(question.answers, :count).by(1)
       end
@@ -12,6 +14,12 @@ describe AnswersController do
         post :create, answer: attributes_for(:answer), question_id: question, format: :js
 	expect(response).to render_template :create
       end
+      
+      it 'assigns current user to answer'
+        post :create, answer: attributes_for(:answer), question_id: question, format: js
+	expect(assigns(:answer).user).to eq @user
+      end
+      
     end
     
     context 'with invalid attributes' do
