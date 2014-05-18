@@ -6,24 +6,27 @@ feature 'Answer editing', %q{
   I'd like to be able to edit my answer
 } do
   
-  given(:user) { create(:user) }
+  given!(:users)    { create_pair(:user)}
   given!(:question) { create(:question) }
-  given!(:answer) { create(:answer, question: question) }
+  given!(:answer)   { create(:answer, question: question) }
+  given!(:answer1)  { create(:answer, question: question, user: users[0]) }
+  given!(:answer2)  { create(:answer, question: question, user: users[1]) }
   
-  scenario 'Unauthentiated user try to edit question' do
+  scenario 'Unauthentiated user try to edit answer' do
     visit question_path(question)
-    
-    expect(page).to_not have_link 'Редактировать'
+    within '.answers' do
+      expect(page).to_not have_link 'Редактировать'
+    end
   end
   
   describe 'Authenticated user' do
     before do
-      sign_in(user)
+      sign_in(users[0])
       visit question_path(question)
     end    
   
-    scenario 'sees link to Edit' do
-      within '.answers' do
+    scenario 'sees link to Edit his answer' do
+      within "#answer-#{answer1.id}" do
         expect(page).to have_link 'Редактировать'
       end
     end

@@ -63,7 +63,7 @@ describe QuestionsController do
   describe 'POST #create' do
     
     login_user
-        
+    
     context 'with valid attributes' do
       it 'saves the new question in database' do
         expect { post :create, question: attributes_for(:question), user_id: user }.to change(Question, :count).by(1)
@@ -73,8 +73,9 @@ describe QuestionsController do
 	expect(response).to redirect_to question_path(assigns(:question))
       end
       
-      it 'saves new question to user.question' do
-        expect { post :create, question: attributes_for(:question), user_id: user }.to change(user.questions, :count).by(1)
+      it 'saves new question to user.questions' do
+	post :create, question: attributes_for(:question), user_id: user
+        expect(assigns(:question).user).to eq @user
       end
       
       
@@ -116,8 +117,8 @@ describe QuestionsController do
       
       it 'does not change question attributes' do
 	question.reload
-	expect(question.title).to eq 'MyString'
-	expect(question.body).to eq 'MyText'
+	expect(question.title).to eq 'QuestionTitle'
+	expect(question.body).to eq 'QuestionText'
       end
       
       it 're-renders edit view'do

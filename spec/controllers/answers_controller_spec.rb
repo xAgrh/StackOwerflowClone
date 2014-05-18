@@ -4,9 +4,9 @@ describe AnswersController do
   let!(:question) { create :question }
    
   describe 'POST #create' do
+    login_user
+    
     context 'with valid attributes' do
-      login_user
-      
       it 'saves the new answer in database' do
         expect { post :create, answer: attributes_for(:answer), question_id: question, format: :js }.to change(question.answers, :count).by(1)
       end
@@ -35,6 +35,7 @@ describe AnswersController do
 
   describe 'PATCH #update' do
     let(:answer) { create(:answer, question:question) }
+    login_user
     
     it 'assigns the requested answer to @answer' do
       patch :update, id: answer, question_id: question, answer: attributes_for(:answer), format: :js
