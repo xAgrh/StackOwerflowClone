@@ -8,7 +8,6 @@ feature 'Answer editing', %q{
   
   given!(:users)    { create_pair(:user)}
   given!(:question) { create(:question) }
-  given!(:answer)   { create(:answer, question: question) }
   given!(:answer1)  { create(:answer, question: question, user: users[0]) }
   given!(:answer2)  { create(:answer, question: question, user: users[1]) }
   
@@ -30,24 +29,40 @@ feature 'Answer editing', %q{
         expect(page).to have_link 'Редактировать'
       end
     end
+    
+    scenario 'try to cancel edit answer', js: true do
+      within "#answer-#{answer1.id}" do
+	click_on 'Редактировать'
+        fill_in 'Ответ', with: 'Отредактировано'
+        click_on 'Отмена'
+        expect(page).to_not have_content 'Отредактировано'
+      end
+    end
+
+    
   
-    scenario 'try to edit his question', js: true do
-      click_on 'Редактировать'
+    scenario 'try to edit his answer', js: true do
       within '.answers' do
-        fill_in 'Answer', with: 'edited answer'
-	click_on 'Save'
-      
-        expect(page).to_not have_content answer.body
-        expect(page).to have_content 'edited answer'
+	click_on 'Редактировать'
+        fill_in 'Ответ', with: 'Отредактировано'
+        click_on 'Сохранить'
+        expect(page).to have_content 'Отредактировано'
+      end
+      within "#answer-#{answer2.id}" do
+        expect(page).to_not have_content answer1.body
         expect(page).to_not have_selector 'textarea'
       end
-      
     end
   
   
-    scenario "try to edit other user's question" 
+    scenario "try to edit other user's question" do
+      visit question_path(question)
+      
+      within "#answer-#{answer2.id}" do
+        expect(page).to_not have_link 'Редактировать'
+      end
+    end
     
     
   end
-  
 end

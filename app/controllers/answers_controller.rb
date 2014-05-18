@@ -18,8 +18,22 @@ class AnswersController < ApplicationController
     @question = @answer.question
   end
   
+  def edit
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
+  end
   
+  def index
+    @question = Question.find(params[:question_id])
+  end
   
+  def destroy
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
+    @answer.destroy
+    flash[:notice] = 'Вы успешно удалили вопрос.'
+    redirect_to question_path(question)
+  end
   
   private 
   

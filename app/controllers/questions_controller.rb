@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :load_question, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [ :new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   
   
   def index
@@ -41,6 +41,7 @@ class QuestionsController < ApplicationController
   
   def destroy
     @question.destroy
+    flash[:notice] = 'Вы успешно удалили вопрос.'
     redirect_to questions_path
   end
   

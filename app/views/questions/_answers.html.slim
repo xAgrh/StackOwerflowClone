@@ -1,11 +1,7 @@
-- @question.answers.each do |answer|
-  - if answer.persisted?
-    pre
-      p= answer.body 
-      - if user_signed_in? 
-        
-          p = link_to 'Редактировать', '', class: 'edit-answer-link', data: { answer_id: answer.id }
-          p = form_for [@question, answer], remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|
-            = f.label :body, "Answer"
-            = f.text_area :body
-            = f.submit 'Save'
+-@question.answers.each do |answer|
+  .answer
+    = answer.body
+    .edit-answer*{ :id => "answer-#{answer.id}" }
+      - if user_signed_in? && answer.persisted? && answer.user == current_user
+        = link_to 'Редактировать',edit_question_answer_path(answer.question, answer),remote: true
+        ' |

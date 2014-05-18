@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe AnswersController do
   let!(:question) { create :question }
+  login_user
    
   describe 'POST #create' do
-    login_user
     
     context 'with valid attributes' do
       it 'saves the new answer in database' do
@@ -32,10 +32,23 @@ describe AnswersController do
       end
     end
   end
+  
+  describe 'GET #edit' do
+    let(:answer) { create(:answer, question: question, user: @user) }
+    
+    before {xhr :get, :edit, id: answer, question_id: question, format: :js}
+    
+    it 'assigns the requested answer to @answer' do
+      expect(assigns(:answer)).to eq answer
+    end
+    
+    it 'render edit view' do
+      expect(response).to render_template :edit
+    end
+  end
 
   describe 'PATCH #update' do
-    let(:answer) { create(:answer, question:question) }
-    login_user
+    let(:answer) { create(:answer, question: question, user: @user) }
     
     it 'assigns the requested answer to @answer' do
       patch :update, id: answer, question_id: question, answer: attributes_for(:answer), format: :js
@@ -56,8 +69,32 @@ describe AnswersController do
       patch :update, id: answer, question_id: question, answer: attributes_for(:answer), format: :js
       expect(response).to render_template :update
     end
+  end
+  
+  describe 'GET #index' do
+    let(:answer) { create(:answer, question: question, user: @user) }
+    before{ xhr :get, :index, question_id: question, format: :js }
     
+    it 'populates an array of all answers on question' do
+      expect(assigns(:question).answers).to match_array(answers)
+    end
     
+    it 'renders index view' do
+      expect(response).to render_template :index
+    end
+  end
+  
+  describe 'DELETE #destroy' do
+    let(:answer) { create(:answer, question: question, user: @user) }
+    
+    it 'deletes answer' do
+      expect { delete :destroy, id: answer }.to change(question.answers, :count).by(-1)
+    end
+    
+    it 'redirect to question show form' do
+      delete :destroy, id: answer
+      expect(response).to redirect_to question_path(question)
+    end
   end
   
   
