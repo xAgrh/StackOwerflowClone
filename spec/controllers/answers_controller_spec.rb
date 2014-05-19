@@ -71,8 +71,9 @@ describe AnswersController do
     end
   end
   
+  
   describe 'GET #index' do
-    let(:answer) { create(:answer, question: question, user: @user) }
+    let(:answers) { create_pair(:answer, question: question, user: @user) }
     before{ xhr :get, :index, question_id: question, format: :js }
     
     it 'populates an array of all answers on question' do
@@ -85,14 +86,17 @@ describe AnswersController do
   end
   
   describe 'DELETE #destroy' do
-    let(:answer) { create(:answer, question: question, user: @user) }
-    
+    login_user
+    let(:question) { create(:question) }
+    let!(:answer)  { create(:answer, question: question, user: @user) }
+ 
+
     it 'deletes answer' do
-      expect { delete :destroy, id: answer }.to change(question.answers, :count).by(-1)
+      expect { delete :destroy, id: answer, question_id: question, format: :js }.to change(@user.answers, :count).by(-1)
     end
     
     it 'redirect to question show form' do
-      delete :destroy, id: answer
+      delete :destroy, id: answer, question_id: question, format: :js
       expect(response).to redirect_to question_path(question)
     end
   end

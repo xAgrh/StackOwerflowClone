@@ -8,7 +8,7 @@ div class="panel panel-default"
     = @question.body
     - if @question.user == current_user
       = link_to 'Редактировать', edit_question_path(@question), class: "btn btn-large btn-primary"
-      
+      = link_to 'Удалить', question_path, :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить вопрос?'}
      
     
 .answers

@@ -32,7 +32,7 @@ class AnswersController < ApplicationController
     @question = @answer.question
     @answer.destroy
     flash[:notice] = 'Вы успешно удалили вопрос.'
-    redirect_to question_path(question)
+    redirect_to question_path(@question)
   end
   
   private 
