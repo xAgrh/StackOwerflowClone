@@ -5,10 +5,16 @@ div class="panel panel-default"
     h3 class="panel-title"
       = @question.title
   div class="panel-body"
-    = @question.body
-    - if @question.user == current_user
-      = link_to 'Редактировать', edit_question_path(@question), class: "btn btn-large btn-primary"
-      = link_to 'Удалить', question_path, :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить вопрос?'}
+    p= @question.body
+    p Attachments:
+    ul
+      - @question.attachments.each do |a|
+        li = a.file.file.filename
+      
+    p
+      - if @question.user == current_user
+        = link_to 'Редактировать', edit_question_path(@question), class: "btn btn-large btn-primary"
+        = link_to 'Удалить', question_path, :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить вопрос?'}
      
     
 .answers
