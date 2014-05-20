@@ -29,6 +29,7 @@ gem 'spring',        group: :development
 
 gem 'slim-rails'
 gem 'devise'
+gem 'carrierwave'
 
 group :test, :developement do
   gem 'rspec-rails'
@@ -41,6 +42,7 @@ group :test, :developement do
   gem 'libnotify', '0.8.0'
   gem 'database_cleaner'
   gem 'capybara-webkit'
+  gem 'nested_form'
 end
 
 group :test do
