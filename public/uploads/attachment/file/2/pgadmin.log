@@ -1,9 +1,0 @@
-2014-04-23 17:48:14 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "rails_user"
-FATAL:  password authentication failed for user "rails_user"
-
-2014-05-05 15:55:11 ERROR  : There is nothing in the SQL pane to save!
-2014-05-05 16:03:20 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "postgres"
-FATAL:  password authentication failed for user "postgres"
-
-2014-05-15 12:03:16 ERROR  : There is nothing in the SQL pane to save!
-2014-05-15 12:03:24 ERROR  : There is nothing in the SQL pane to save!

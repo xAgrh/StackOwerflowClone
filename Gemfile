@@ -30,6 +30,7 @@ gem 'spring',        group: :development
 gem 'slim-rails'
 gem 'devise'
 gem 'carrierwave'
+gem 'remotipart'
 
 group :test, :developement do
   gem 'rspec-rails'
@@ -43,6 +44,7 @@ group :test, :developement do
   gem 'database_cleaner'
   gem 'capybara-webkit'
   gem 'nested_form'
+  
 end
 
 group :test do

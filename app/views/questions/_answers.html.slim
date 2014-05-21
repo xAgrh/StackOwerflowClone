@@ -1,8 +1,15 @@
 -@question.answers.each do |answer|
-  .answer
-    = answer.body
-    .edit-answer*{ :id => "answer-#{answer.id}" }
-      - if user_signed_in? && answer.persisted? && answer.user == current_user
-        = link_to 'Редактировать',edit_question_answer_path(answer.question, answer),remote: true
-        ' |
-        = link_to 'Удалить', question_answer_path(answer.question.id, answer.id), :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить ответ?'}
+  - if answer.persisted?
+    .answer
+      = answer.body
+      ul
+        - answer.attachments.each do |a|
+          /li = a.file.file.filename
+          li = link_to a.file.identifier, a.file.url
+      .edit-answer*{ :id => "answer-#{answer.id}" }
+        - if user_signed_in? && answer.user == current_user
+          = link_to 'Редактировать',edit_question_answer_path(answer.question, answer),remote: true
+          ' |
+          = link_to 'Удалить', question_answer_path(answer.question.id, answer.id), :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить ответ?'}
+        
+        
