@@ -1,14 +1,31 @@
-= form_for @question do |f|
-  p
-    = f.label :title
-    = f.text_field :title
-  p
-    = f.label :body, 'Text'
-    = f.text_area :body
-  p Attachments:
-  p
-    = f.fields_for :attachments do |a|
-      = a.label :file
-      = a.file_field :file
-  
-  p = f.submit 'Create'
+div class="panel panel-default" 
+  div class="panel-heading"
+    | Задайте Ваш вопрос
+  div class="panel-body"
+  = nested_form_for @question do |f|
+    p style = "padding-left: 10px"
+      = f.label :title
+      = f.text_field :title
+    p style = "padding-left: 10px"
+      = f.label :body, 'Text'
+      = f.text_area :body
+    br
+    | Приложения:
+    
+    p 
+      = f.fields_for :attachments do |a|
+    
+        ul class="list-group"
+          li class="list-group-item" 
+            = a.label :file
+            = a.file_field :file
+            = a.link_to_remove "Удалить этот файл"
+       
+    p 
+      = f.link_to_add "Add file", :attachments,  class: "btn btn-info"
+    | &nbsp
+    p 
+      = f.submit 'Create',  class: "btn btn-success"
+    
+
+

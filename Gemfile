@@ -31,6 +31,7 @@ gem 'slim-rails'
 gem 'devise'
 gem 'carrierwave'
 gem 'remotipart'
+gem 'nested_form', :git => 'git://github.com/ryanb/nested_form.git'
 
 group :test, :developement do
   gem 'rspec-rails'
@@ -43,7 +44,7 @@ group :test, :developement do
   gem 'libnotify', '0.8.0'
   gem 'database_cleaner'
   gem 'capybara-webkit'
-  gem 'nested_form'
+  
   
 end
 

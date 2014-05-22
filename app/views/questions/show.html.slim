@@ -1,39 +1,61 @@
-
-
-div class="panel panel-default"
-  div class="panel-heading"
-    h3 class="panel-title"
+div class="row" class="bg-info" style="padding: 20px"
+  div class="col-md-1" 
+    img src="//static.copiny.com/images/user-small.png" alt=""
+  div class="col-md-11"
+    div class="bg-success" style="padding: 15px"
+      | Пользователь,
+      | Время создания, 
+      | Рейтинг
+    
+    h4 style="padding:15px"
       = @question.title
-  div class="panel-body"
-    p= @question.body
+    p style="padding-left:15px"
+      = @question.body
+    
+    div class="panel panel-default"
+      div class="panel-heading"
+        div class="panel-title"
+         | Отмечен лучшим ответом
+      div class="panel-body"
+         | Morbi at augue mauris. Etiam volutpat tortor vitae malesuada pulvinar. Maecenas id neque mi. Nunc tincidunt id risus id vulputate. Pellentesque a sapien urna. Donec hendrerit ultricies lorem, vel interdum enim semper nec. Nullam sit amet tempor felis. Aliquam sagittis enim metus, vel facilisis lorem hendrerit at. Curabitur scelerisque laoreet molestie. 
+      
+
     p Attachments:
     ul
       - @question.attachments.each do |a|
-        /li = a.file.file.filename
-        li = link_to a.file.identifier, a.file.url
-      
-    p
+        - if a.file.identifier != nil
+
+          /li = a.file.file.filename
+          li = link_to a.file.identifier, a.file.url
+        
+    p class="pull-right"
       - if @question.user == current_user
         = link_to 'Редактировать', edit_question_path(@question), class: "btn btn-large btn-primary"
-        = link_to 'Удалить', question_path, :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить вопрос?'}
-     
+        | &nbsp
+        = link_to 'Удалить', question_path, :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить вопрос?'}, class: "btn btn-large btn-danger"
+
+  
     
-.answers
+.answers style="margin-top:15px"
   = render 'answers'
     
-div class="panel panel-default"
+div class="panel panel-default" style="margin-top:15px"
   div class="panel-body"
-    = form_for [@question, @answer], remote: true do |f|
+    = nested_form_for [@question, @answer], remote: true do |f|
       p
         = f.label :body, 'Your answer'
         .answer-errors
         = f.text_area :body
       p
-        = f.fields_for :attachments do |a|
-          = a.label :file
-          = a.file_field :file
+        = f.fields_for :attachments do |b|
+          = b.label :file
+          = b.file_field :file
+          = b.link_to_remove "Удалить этот файл"
        
-      p= f.submit 'Create'
+      p 
+        = f.link_to_add "Add file", :attachments,  class: "btn btn-info"
+        | &nbsp
+        = f.submit 'Create',  class: "btn btn-success"
     
       
 = link_to 'Назад', root_path
