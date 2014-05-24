@@ -9,4 +9,5 @@ class Answer < ActiveRecord::Base
   
   accepts_nested_attributes_for :attachments, :allow_destroy => true
   
+  
 end

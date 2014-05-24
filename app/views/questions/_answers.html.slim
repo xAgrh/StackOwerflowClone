@@ -24,6 +24,6 @@
             - if user_signed_in? && answer.user == current_user
               = link_to 'Редактировать',edit_question_answer_path(answer.question, answer),remote: true
               ' |
-              = link_to 'Удалить', question_answer_path(answer.question.id, answer.id), :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить ответ?'}
+              = link_to 'Удалить', question_answer_path(@question, answer), :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить ответ?'}
               
-        
+
