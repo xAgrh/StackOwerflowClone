@@ -38,10 +38,12 @@ div class="row" class="bg-info" style="padding: 20px"
     
 .answers style="margin-top:15px"
   = render 'answers'
-    
+
+
 div class="panel panel-default" style="margin-top:15px"
   div class="panel-body"
-    = nested_form_for [@question, @answer], remote: true do |f|
+    = nested_form_for [@question, @answer], remote: true do |f|    
+   
       p
         = f.label :body, 'Your answer'
         .answer-errors

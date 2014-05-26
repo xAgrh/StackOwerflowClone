@@ -1,29 +1,31 @@
 -@question.answers.each do |answer|
   - if answer.persisted?
-    
-    div class="row" style="border-top:1px solid lightgray"
-      div class="col-md-1" 
-        img src="//static.copiny.com/images/user-small.png" alt=""
-      div class="col-md-11"
-        div class="bg-success" style="padding: 15px"
-          | Пользователь,
-          | Время создания, 
-          | Рейтинг
+    .answer 
+      div class="row" style="border-top:1px solid lightgray"
+        div class="col-md-1" 
+          img src="//static.copiny.com/images/user-small.png" alt=""
+        div class="col-md-11"
+          div class="bg-success" style="padding: 15px"
+            | Пользователь,
+            | Время создания, 
+            | Рейтинг
 
       
-        p style="padding: 15px 0px 0px 15px"
-          = answer.body
-          .answer
-            ul
-              - answer.attachments.each do |a|
-                - if a.file.identifier != nil
-                  /li = a.file.file.filename
-                  li = link_to a.file.identifier, a.file.url
+          p style="padding: 15px 0px 0px 15px"
+            = answer.body
+            .answerattach
+              ul
+                - answer.attachments.each do |a|
+                  - if a.file.identifier != nil
+                    /li = a.file.file.filename
+                    li = link_to a.file.identifier, a.file.url
           
-          .edit-answer*{ :id => "answer-#{answer.id}" } 
-            - if user_signed_in? && answer.user == current_user
-              = link_to 'Редактировать',edit_question_answer_path(answer.question, answer),remote: true
-              ' |
-              = link_to 'Удалить', question_answer_path(@question, answer), :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить ответ?'}
+            .edit-answer*{ :id => "answer-#{answer.id}" } 
+             - if user_signed_in? && answer.user == current_user
+                = link_to 'Редактировать',edit_question_answer_path(answer.question, answer),remote: true
+                ' |
+                = link_to 'Удалить', question_answer_path(@question, answer), :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить ответ?'}
+              
+         
               
 

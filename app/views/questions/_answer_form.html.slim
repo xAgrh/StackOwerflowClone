@@ -3,4 +3,4 @@ pre
     = f.label :body, 'Ответ'
     = f.text_area :body
     = f.submit 'Сохранить'
-    = link_to 'Отмена', question_answers_path, question_id: @question.id, remote: true
+    button(onclick="cancelForm()") Отмена
