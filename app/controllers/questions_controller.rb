@@ -9,20 +9,16 @@ class QuestionsController < ApplicationController
   
   def show
     @answer = @question.answers.build
-    @answer.attachments.build
-    @answer.comments.build
-    
+    @answer.attachments.build 
   end
   
   def new
     @question = Question.new
     @question.attachments.build
-    @question.comments.build
   end
   
   def edit
-    @question.attachments.build
-    @question.comments.build
+    @question.attachments.build  
   end
   
   def create

@@ -1,0 +1,10 @@
+ 
+h2 Add a comment:
+= form_for([@question, @question.comments.build]) do |f| 
+  p
+    = f.label :body
+    = f.text_area :body
+  
+  p
+    = f.submit
+

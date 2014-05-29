@@ -20,13 +20,13 @@ div class="row" class="bg-info" style="padding: 20px"
          | Morbi at augue mauris. Etiam volutpat tortor vitae malesuada pulvinar. Maecenas id neque mi. Nunc tincidunt id risus id vulputate. Pellentesque a sapien urna. Donec hendrerit ultricies lorem, vel interdum enim semper nec. Nullam sit amet tempor felis. Aliquam sagittis enim metus, vel facilisis lorem hendrerit at. Curabitur scelerisque laoreet molestie. 
     p style="padding: 15px 0px 0px 15px"
             
-    p
-      - @question.comments.each do |a|
-        = a.body
-    p 
-      = fields_for :comments do |c|
-        = c.text_area :body
-        = c.submit 'Create',  class: "btn btn-success"
+    h2 Comments
+ 
+    ul class="comment_list"
+      = render @question.comments
+      
+    = render 'comments/comment_form'  
+
         
     p Attachments:
     ul

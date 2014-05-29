@@ -3,9 +3,14 @@ Rails.application.routes.draw do
   root "static_pages#home"
 
   devise_for :users
+  
   resources :questions do
     resources :answers
+    resources :comments
   end
+  
+
+
   
   
   # The priority is based upon order of creation: first created -> highest priority.
