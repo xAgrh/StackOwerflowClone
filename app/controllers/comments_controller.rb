@@ -4,8 +4,17 @@ class CommentsController < ApplicationController
   
   def create
     @question = Question.find(params[:question_id])
-    @comment = @question.comments.create(comment_params)
-    redirect_to question_path(@question)
+    @comment = @question.comments.build(comment_params)
+    
+    respond_to do |format|
+      if @comment.save
+        format.html { render partial: 'comments/comments', layout: false }
+        format.json { render json: @comment }
+      else
+        format.html { render text: @comment.errors.full_messages.join("\n"), status: :unprocessable_entity }
+        format.json { render json: @comment.errors.full_messages, status: :unprocessable_entity }
+      end
+    end
   end
  
   private

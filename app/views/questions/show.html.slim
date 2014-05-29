@@ -22,10 +22,20 @@ div class="row" class="bg-info" style="padding: 20px"
             
     h2 Comments
  
-    ul class="comment_list"
-      = render @question.comments
+    .comments
+      = render 'comments/comments'
+    
+    .add_comment
       
-    = render 'comments/comment_form'  
+      h2 Add a comment:
+      .comment-errors 
+      = form_for [@question, @comment], remote: true, data: { type: :json } do |f| 
+        p
+          = f.label :body
+          = f.text_area :body
+  
+        p
+          = f.submit
 
         
     p Attachments:

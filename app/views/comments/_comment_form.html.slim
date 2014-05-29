@@ -1,6 +1,6 @@
  
-h2 Add a comment:
-= form_for([@question, @question.comments.build]) do |f| 
+h2 Edit a comment:
+= form_for [@question, @comment], remote: true do |f| 
   p
     = f.label :body
     = f.text_area :body
