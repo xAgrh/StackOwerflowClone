@@ -14,6 +14,5 @@ describe Answer do
   it { should validate_presence_of :user_id }
   
   it { should accept_nested_attributes_for :attachments }
-  it { should accept_nested_attributes_for :comments }
   
 end

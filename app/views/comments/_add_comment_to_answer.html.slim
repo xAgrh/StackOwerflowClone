@@ -1,0 +1,9 @@
+.comment-errors 
+
+= form_for [answer, answer.comments.build], remote: true, data: { type: :json } do |f| 
+  p  
+    = f.label :body
+    = f.text_area :body
+  
+  p
+    = f.submit 'Добавить комментарий', class: "btn btn-info"

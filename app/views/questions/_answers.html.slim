@@ -1,6 +1,6 @@
--@question.answers.each do |answer|
+-@question.answers.each_with_index do |answer, id|
   - if answer.persisted?
-    .answer 
+    .answer*{ :id => "answer-#{answer.id}"}
       div class="row" style="border-top:1px solid lightgray"
         div class="col-md-1" 
           img src="//static.copiny.com/images/user-small.png" alt=""
@@ -21,12 +21,27 @@
                     /li = a.file.file.filename
                     li = link_to a.file.identifier, a.file.url
           
-            .edit-answer*{ :id => "answer-#{answer.id}" } 
+            .edit-answer
              - if user_signed_in? && answer.user == current_user
                 = link_to 'Редактировать',edit_question_answer_path(answer.question, answer),remote: true
                 ' |
                 = link_to 'Удалить', question_answer_path(@question, answer), :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить ответ?'}
-              
+
+      .comments_in_answer
+        = render 'comments/show_comments_in_answer'
+        
+    div class="panel-group" id="accordion" style="margin-top:5px"
+     div class="panel panel-info"
+      div class="panel-heading" style="background-color: #fff; border-top-right-radius: 0px; border-top-left-radius: 0px;"
+        h4 class="panel-title"
+          a data-toggle="collapse" data-parent="#accordion" href="#{"#collapse" + id.to_s}"  
+            | Комментировать ответ
+          
+        
+        div id="#{"collapse" + id.to_s}" class="panel-collapse collapse"
+          div class="panel-body"
+            .add_comment_to_answer
+              = render 'comments/add_comment_to_answer', answer: answer   
             
               
 

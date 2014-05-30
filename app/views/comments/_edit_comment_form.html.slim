@@ -1,4 +1,3 @@
- 
 h2 Edit a comment:
 = form_for [@question, @comment], remote: true do |f| 
   p
@@ -6,5 +5,5 @@ h2 Edit a comment:
     = f.text_area :body
   
   p
-    = f.submit
+    = f.submit class: "btn btn-success"
 

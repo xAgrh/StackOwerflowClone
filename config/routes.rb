@@ -5,10 +5,12 @@ Rails.application.routes.draw do
   devise_for :users
   
   resources :questions do
-    resources :answers
+    resources :answers 
     resources :comments
   end
-  
+  resources :answers do
+      resources :comments
+  end
 
 
   

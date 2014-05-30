@@ -3,12 +3,14 @@ class CommentsController < ApplicationController
   
   
   def create
-    @question = Question.find(params[:question_id])
-    @comment = @question.comments.build(comment_params)
+    
+    @parent = Question.find(params[:question_id]) if params[:question_id]
+    @parent ||= Answer.find(params[:answer_id]) 
+    @comment = @parent.comments.build(comment_params)
     
     respond_to do |format|
       if @comment.save
-        format.html { render partial: 'comments/comments', layout: false }
+        format.html { render partial: 'comments/show_comments', layout: false }
         format.json { render json: @comment }
       else
         format.html { render text: @comment.errors.full_messages.join("\n"), status: :unprocessable_entity }

@@ -48,7 +48,7 @@ feature 'Answer editing', %q{
         click_on 'Сохранить'
         expect(page).to have_content 'Отредактировано'
       end
-      within "#answer-#{answer2.id}" do
+      within "#answer-#{answer2.id} .edit-answer" do
         expect(page).to_not have_content answer1.body
         expect(page).to_not have_selector 'textarea'
       end
