@@ -1,5 +1,8 @@
 require 'spec_helper'
 
 describe Tag do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should validate_presence_of :name }
+  
+  it { should have_many :question_tags }
+  it { should have_many :questions }
 end
