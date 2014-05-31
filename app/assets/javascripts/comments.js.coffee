@@ -9,7 +9,6 @@ $ ->
     if (comment.commentable_type == "Question") 
       $('.comments').append('<p>' + comment.body + '</p>')
     if (comment.commentable_type == "Answer")
-      console.log "comment"
       $('#answer-' + comment.commentable_id + ' .comments_in_answer').append('<p>' + comment.body + '</p>')
   .bind 'ajax:error', (e, xhr, status, error) ->
     errors = $.parseJSON(xhr.responceText)

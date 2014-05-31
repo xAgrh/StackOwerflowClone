@@ -28,7 +28,7 @@
                 = link_to 'Удалить', question_answer_path(@question, answer), :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить ответ?'}
 
       .comments_in_answer
-        = render 'comments/show_comments_in_answer'
+        = render 'comments/show_comments_in_answer', answer: answer  
         
     div class="panel-group" id="accordion" style="margin-top:5px"
      div class="panel panel-info"
