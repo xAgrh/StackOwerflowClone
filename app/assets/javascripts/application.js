@@ -15,4 +15,16 @@
 //= require turbolinks
 //= require_tree .
 //= require jquery.remotipart
+//= require select2
+
+ 
+
+jQuery(function($) {
+  $("#question_tag_names").select2({
+    tags:[],
+    tokenSeparators: [",", " "],
+    maximumSelectionSize: 5,
+    width: '400'
+  });
+});
 

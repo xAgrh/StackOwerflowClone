@@ -13,4 +13,12 @@ class Question < ActiveRecord::Base
   accepts_nested_attributes_for :attachments, allow_destroy: true
   accepts_nested_attributes_for :tags, allow_destroy: true
   
+  def tag_names
+    tags.pluck(:name)
+  end
+  
+  def tag_names=(names)
+    self.tags = names.split(",").map { |name| Tag.where(name: name).first_or_create! }
+  end
+  
 end

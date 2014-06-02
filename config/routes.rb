@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :answers do
       resources :comments
   end
+  resources :tags, only: [:index, :create]
+  
 
 
   

@@ -9,6 +9,7 @@ div class="panel panel-default"
     p style = "padding-left: 10px"
       = f.label :body, 'Text'
       = f.text_area :body
+      = f.input :tag_names, label: 'Tags', html_input: { class: "select2-container-multi" }
     br
     | Приложения:
     
