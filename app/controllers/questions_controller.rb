@@ -11,11 +11,14 @@ class QuestionsController < ApplicationController
     @answer = @question.answers.build
     @answer.attachments.build 
     @comment = @question.comments.build
+    @question.tags.build
   end
   
   def new
     @question = Question.new
     @question.attachments.build
+    @question.tags.build
+    
   end
   
   def edit

@@ -10,6 +10,7 @@ class Question < ActiveRecord::Base
   validates :title, :body, presence: true 
   validates :user_id,      presence: true
   
-  accepts_nested_attributes_for :attachments, :allow_destroy => true
+  accepts_nested_attributes_for :attachments, allow_destroy: true
+  accepts_nested_attributes_for :tags, allow_destroy: true
   
 end
