@@ -5,10 +5,13 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = @question.answers.build(answer_params)  
     @answer.user = current_user
-    if @answer.save
-      flash[:notice] = 'Вы успешно создали ответ.'
-    else
-      flash[:alert] = 'Ошибка при сохранении ответа'
+    respond_to do |format|
+      if @answer.save
+        format.js
+        flash[:notice] = 'Вы успешно создали ответ.'
+      else
+        flash[:alert] = 'Ошибка при сохранении ответа'
+      end
     end
     
      # if @answer.save

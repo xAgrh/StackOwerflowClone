@@ -33,6 +33,8 @@ gem 'carrierwave'
 gem 'remotipart'
 gem 'nested_form', :git => 'git://github.com/ryanb/nested_form.git'
 gem 'select2-rails'
+gem 'private_pub'
+gem 'thin'
 
 
 group :test, :developement do

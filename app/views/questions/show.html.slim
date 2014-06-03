@@ -84,7 +84,8 @@ div class="panel panel-default" style="margin-top:15px"
         = f.link_to_add "Add file", :attachments,  class: "btn btn-info"
         | &nbsp
         = f.submit 'Create',  class: "btn btn-success"
-    
+
+= subscribe_to "/questions/#{@question.id}/answers"    
       
 = link_to 'Назад', root_path
     
