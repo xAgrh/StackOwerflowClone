@@ -2,10 +2,15 @@ div class="row" class="bg-info" style="padding: 20px 20px 0px 20px"
   div class="col-md-1" 
     img src="//static.copiny.com/images/user-small.png" alt=""
   div class="col-md-11"
-    div class="bg-success" style="padding: 15px"
-      | Пользователь,
-      | Время создания, 
-      | Рейтинг
+    div class="bg-success" style="padding: 5px 0px 5px 15px"
+      = link_to @question.user.email
+      br
+      = @question.created_at
+
+
+
+
+    
     
     h4 style="padding:15px"
       = @question.title
@@ -41,7 +46,7 @@ div class="row" class="bg-info" style="padding: 20px 20px 0px 20px"
         | &nbsp
         = link_to 'Удалить', question_path, :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить вопрос?'}, class: "btn btn-large btn-danger"
 
-.comments
+.comments data={question_id: "#{@question.id}"}
   = render 'comments/show_comments' 
         
 div class="panel-group" id="accordion" style="margin-top:5px"
@@ -85,7 +90,8 @@ div class="panel panel-default" style="margin-top:15px"
         | &nbsp
         = f.submit 'Create',  class: "btn btn-success"
 
-= subscribe_to "/questions/#{@question.id}/answers"    
+= subscribe_to "/questions/#{@question.id}/answers"   
+= subscribe_to "/questions/#{@question.id}/comments" 
       
 = link_to 'Назад', root_path
     

@@ -4,13 +4,18 @@
 $ ->
 
 
-  $('form.new_comment').bind 'ajax:success', (e, data, status, xhr) ->
-    comment = $.parseJSON(xhr.responseText)
-    if (comment.commentable_type == "Question") 
-      $('.comments').append('<p>' + comment.body + '</p>')
-    if (comment.commentable_type == "Answer")
-      $('#answer-' + comment.commentable_id + ' .comments_in_answer').append('<p>' + comment.body + '</p>')
-  .bind 'ajax:error', (e, xhr, status, error) ->
-    errors = $.parseJSON(xhr.responceText)
-    $.each errors, (index, value) ->
-      $('.comment-errors').append(value)
+#  $('form.new_comment').bind 'ajax:success', (e, data, status, xhr) ->
+#    comment = $.parseJSON(xhr.responseText)
+#    if (comment.commentable_type == "Question") 
+#      $('.comments').append('<p>' + comment.body + '</p>')
+#    if (comment.commentable_type == "Answer")
+#      $('#answer-' + comment.commentable_id + ' .comments_in_answer').append('<p>' + comment.body + '</p>')
+#  .bind 'ajax:error', (e, xhr, status, error) ->
+#    errors = $.parseJSON(xhr.responceText)
+#    $.each errors, (index, value) ->
+#      $('.comment-errors').append(value)
+
+  questionId = $('.comments').data('questionId') 
+  PrivatePub.subscribe '/questions/' + questionId + '/comments', (data, channel) ->
+    alert(data)
+  

@@ -26,9 +26,8 @@ class QuestionsController < ApplicationController
   end
   
   def create
-    @question = Question.new(question_params)
-    @question.user = current_user
-    
+    @question = current_user.questions.build(question_params)
+        
     if @question.save
       flash[:notice] = 'Вы успешно создали вопрос.'
       redirect_to @question
@@ -66,6 +65,6 @@ class QuestionsController < ApplicationController
   end
   
   def question_params
-    params.require(:question).permit(:title, :body, :tag_names, attachments_attributes: [:id, :file, :_destroy], comments_attributes: [:id, :body, :_destroy], tags_attributes: [:name])
+    params.require(:question).permit(:title, :body, :user_id, :tag_names, attachments_attributes: [:id, :file, :_destroy], comments_attributes: [:id, :body, :_destroy], tags_attributes: [:name])
   end
 end

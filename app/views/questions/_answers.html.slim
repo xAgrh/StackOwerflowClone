@@ -5,10 +5,10 @@
         div class="col-md-1" 
           img src="//static.copiny.com/images/user-small.png" alt=""
         div class="col-md-11"
-          div class="bg-success" style="padding: 15px"
-            | Пользователь,
-            | Время создания, 
-            | Рейтинг
+          div class="bg-success" style="padding: 5px 0px 5px 15px"
+            = link_to answer.question.user.email
+            br
+            = answer.created_at
 
       
           p style="padding: 15px 0px 0px 15px"
