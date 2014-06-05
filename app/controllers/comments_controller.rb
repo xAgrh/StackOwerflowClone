@@ -10,8 +10,13 @@ class CommentsController < ApplicationController
     
     respond_to do |format|
       if @comment.save
-        format.html { render partial: 'comments/show_comments', layout: false }
-        format.json { render json: @comment }
+        # format.html { render partial: 'comments/show_comments', layout: false }
+        # format.json { render json: @comment }
+	format.json do
+	  PrivatePub.publish_to "/questions/#{@parent.id}/comments", comment: @comment.to_json
+	  PrivatePub.publish_to "/answers/#{@parent.id}/comments", comment: @comment.to_json
+	  render nothing: true
+	end
       else
         format.html { render text: @comment.errors.full_messages.join("\n"), status: :unprocessable_entity }
         format.json { render json: @comment.errors.full_messages, status: :unprocessable_entity }

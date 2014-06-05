@@ -15,7 +15,16 @@ $ ->
 #    $.each errors, (index, value) ->
 #      $('.comment-errors').append(value)
 
-  questionId = $('.comments').data('questionId') 
+  questionId = $('.comments').data('questionId')
   PrivatePub.subscribe '/questions/' + questionId + '/comments', (data, channel) ->
-    alert(data)
-  
+    comment = $.parseJSON(data['comment'])
+    $('.comments').append('<p>' + comment.body + '</p>')
+    
+    
+  answerId = $('.comments_in_answer').data('answerId')
+  console.log(answerId)
+  PrivatePub.subscribe '/answers/' + answerId + '/comments', (data, channel) ->
+    console.log(data)
+    comment = $.parseJSON(data['comment'])
+    $('#answer-' + comment.commentable_id + ' .comments_in_answer').append('<p>' + comment.body + '</p>')
+    
