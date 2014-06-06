@@ -10,7 +10,7 @@ div class="panel panel-default"
       = f.label :body, 'Text'
       = f.text_area :body
       = f.label :tag_names
-      = f.text_field :tag_names, label: 'Tags', html_input: { class: "select2-container-multi" }
+      = f.text_field :tag_names, label: 'Tags', class: "select2-container-multi", value: '' 
     br
     | Приложения:
     

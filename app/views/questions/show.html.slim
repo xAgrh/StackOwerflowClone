@@ -91,7 +91,8 @@ div class="panel panel-default" style="margin-top:15px"
         = f.submit 'Create',  class: "btn btn-success"
 
 = subscribe_to "/questions/#{@question.id}/answers"   
-= subscribe_to "/questions/#{@question.id}/comments" 
+= subscribe_to "/questions/#{@question.id}/comments"
+= subscribe_to "/questions/#{@question.id}/answers/comments"
 
       
 = link_to 'Назад', root_path

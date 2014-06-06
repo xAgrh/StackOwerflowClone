@@ -2,4 +2,5 @@
   p
    | tags:
 
-   = @question.tag_names.map { |t| link_to t, "#" }
+   - @question.tag_names.each do |t| 
+     = link_to t, "#" 
