@@ -35,10 +35,11 @@ gem 'nested_form', :git => 'git://github.com/ryanb/nested_form.git'
 gem 'select2-rails'
 gem 'private_pub'
 gem 'thin'
+gem 'inherited_resources'
 
 
 group :test, :developement do
-  gem 'rspec-rails'
+  gem "rspec-rails", "~> 2.8"
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'

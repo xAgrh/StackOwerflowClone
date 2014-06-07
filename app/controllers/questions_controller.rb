@@ -1,69 +1,29 @@
-class QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :load_question, only: [:show, :edit, :update, :destroy]
+class QuestionsController < InheritedResources::Base
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]  
+  before_action :build_answer, only: :show
+  before_action :build_attachment, only: :new
+  before_action :build_tag, only: :new
+  
+  respond_to :html
   
   
-  def index
-    @questions = Question.all
-  end
+  protected
   
-  def show
-    @answer = @question.answers.build
+  def build_answer
+    @answer = resource.answers.build
     @answer.attachments.build 
-    @comment = @question.comments.build
-    @question.tags.build
+    @comment = resource.comments.build
+    resource.tags.build
   end
   
-  def new
-    @question = Question.new
-    @question.attachments.build
-    @question.tags.build
+  def build_attachment
+    build_resource.attachments.build
+  end
+ 
+  def build_tag
+    build_resource.tags.build
+  end
     
-  end
-  
-  def edit
-    @question.attachments.build  
-  end
-  
-  def create
-    @question = current_user.questions.build(question_params)
-        
-    if @question.save
-      flash[:notice] = 'Вы успешно создали вопрос.'
-      redirect_to @question
-    else
-      render :new
-    end
-  end
-  
-  def update
-    if @question.update(question_params)
-      flash[:notice] = 'Вы успешно отредактировали вопрос.'
-      redirect_to @question
-    else
-      render :edit
-    end
-  end
-  
-  def destroy
-    @question.destroy
-    flash[:notice] = 'Вы успешно удалили вопрос.'
-    redirect_to questions_path
-  end
-  
-  private
-  
-  def question_belongs_to_current_user
-    unless current_user == @question.user
-      flash[:alert] = 'Это не Ваш вопрос!'
-      redirect_to root_path
-    end
-  end
-  
-  def load_question
-    @question = Question.find(params[:id])
-  end
-  
   def question_params
     params.require(:question).permit(:title, :body, :user_id, :tag_names, attachments_attributes: [:id, :file, :_destroy], comments_attributes: [:id, :body, :_destroy], tags_attributes: [:name])
   end

@@ -18,7 +18,7 @@ feature 'Answer editing', %q{
     end
   end
   
-  describe 'Authenticated user' do
+  describe 'Authenticated user', js: true do
     before do
       sign_in(users[0])
       visit question_path(question)
@@ -31,7 +31,7 @@ feature 'Answer editing', %q{
     end
     
     scenario 'try to cancel edit answer', js: true do
-      within "#answer-#{answer1.id}" do
+      within "#answer-#{answer1.id} .edit-answer" do
 	click_on 'Редактировать'
         fill_in 'Ответ', with: 'Отредактировано'
         click_on 'Отмена'
@@ -42,7 +42,7 @@ feature 'Answer editing', %q{
     
   
     scenario 'try to edit his answer', js: true do
-      within '.answers' do
+      within "#answer-#{answer2.id} .edit-answer" do
 	click_on 'Редактировать'
         fill_in 'Ответ', with: 'Отредактировано'
         click_on 'Сохранить'
@@ -55,7 +55,7 @@ feature 'Answer editing', %q{
     end
   
   
-    scenario "try to edit other user's question" do
+    scenario "try to edit other user's question", js: true  do
       visit question_path(question)
       
       within "#answer-#{answer2.id}" do
