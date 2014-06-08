@@ -1,5 +1,5 @@
 class QuestionsController < InheritedResources::Base
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]  
+  before_action :authenticate_user!, only: [:new, :create]  
   before_action :build_answer, only: :show
   before_action :build_attachment, only: :new
   before_action :build_tag, only: :new
@@ -10,8 +10,6 @@ class QuestionsController < InheritedResources::Base
   protected
   
   def build_answer
-    @answer = resource.answers.build
-    @answer.attachments.build 
     @comment = resource.comments.build
     resource.tags.build
   end

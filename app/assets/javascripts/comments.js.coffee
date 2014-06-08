@@ -22,9 +22,7 @@ $ ->
     
     
 
-  console.log(questionId)
   PrivatePub.subscribe '/questions/' + questionId + '/answers/comments', (data, channel) ->
-    console.log(data)
     comment = $.parseJSON(data['comment'])
     $('#answer-' + comment.commentable_id + ' .comments_in_answer').append('<p>' + comment.body + '</p>')
     

@@ -3,9 +3,9 @@ div class="row" class="bg-info" style="padding: 20px 20px 0px 20px"
     img src="//static.copiny.com/images/user-small.png" alt=""
   div class="col-md-11"
     div class="bg-success" style="padding: 5px 0px 5px 15px"
-      = link_to @question.user.email
+      = link_to resource.user.email
       br
-      = @question.created_at
+      = resource.created_at
 
 
 
@@ -13,9 +13,9 @@ div class="row" class="bg-info" style="padding: 20px 20px 0px 20px"
     
     
     h4 style="padding:15px"
-      = @question.title
+      = resource.title
     p style="padding-left:15px"
-      = @question.body
+      = resource.body
     
     p
       = render 'question_tags'
@@ -35,18 +35,18 @@ div class="row" class="bg-info" style="padding: 20px 20px 0px 20px"
     p Attachments:
     ul
       .questionfile
-        - @question.attachments.each do |a|
+        - resource.attachments.each do |a|
           - if a.file.present?
             /li = a.file.file.filename
             li = link_to a.file.identifier, a.file.url
         
     p class="pull-right"
-      - if @question.user == current_user
-        = link_to 'Редактировать', edit_question_path(@question), class: "btn btn-large btn-primary"
+      - if resource.user == current_user
+        = link_to 'Редактировать', edit_question_path(resource), class: "btn btn-large btn-primary"
         | &nbsp
         = link_to 'Удалить', question_path, :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить вопрос?'}, class: "btn btn-large btn-danger"
 
-.comments data={question_id: "#{@question.id}"}
+.comments data={question_id: "#{resource.id}"}
   = render 'comments/show_comments' 
         
 div class="panel-group" id="accordion" style="margin-top:5px"
@@ -72,7 +72,7 @@ div class="panel-group" id="accordion" style="margin-top:5px"
 
 div class="panel panel-default" style="margin-top:15px"
   div class="panel-body"
-    = nested_form_for [@question, @answer], remote: true do |f|    
+    = nested_form_for [resource, resource.answers.build], remote: true do |f|    
    
       p
         = f.label :body, 'Your answer'
@@ -90,9 +90,9 @@ div class="panel panel-default" style="margin-top:15px"
         | &nbsp
         = f.submit 'Create',  class: "btn btn-success"
 
-= subscribe_to "/questions/#{@question.id}/answers"   
-= subscribe_to "/questions/#{@question.id}/comments"
-= subscribe_to "/questions/#{@question.id}/answers/comments"
+= subscribe_to "/questions/#{resource.id}/answers"   
+= subscribe_to "/questions/#{resource.id}/comments"
+= subscribe_to "/questions/#{resource.id}/answers/comments"
 
       
 = link_to 'Назад', root_path

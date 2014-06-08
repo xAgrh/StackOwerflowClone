@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  root "static_pages#home"
+  root "questions#index"
 
   devise_for :users
   

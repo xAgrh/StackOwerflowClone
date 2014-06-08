@@ -2,7 +2,7 @@ div class="panel panel-default"
   div class="panel-heading"
     | Задайте Ваш вопрос
   div class="panel-body"
-  = nested_form_for @question do |f|
+  = nested_form_for resource do |f|
     p style = "padding-left: 10px"
       = f.label :title
       = f.text_field :title
