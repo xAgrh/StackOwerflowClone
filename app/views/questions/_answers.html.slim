@@ -1,4 +1,4 @@
--@question.answers.each_with_index do |answer, id|
+- @question.answers.each_with_index do |answer, id|
   - if answer.persisted?
     .answer*{ :id => "answer-#{answer.id}"}
       div class="row" style="border-top:1px solid lightgray"

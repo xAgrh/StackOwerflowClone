@@ -1,7 +1,6 @@
- 
-= form_for collection do |f|
-  = f.text_field :title, autofocus: true
-  = f.text_area :body, label: 'Question'
-  = f.submit 'Редактировать'
+= nested_form_for resource do |f|
+  = render partial: "form", locals: { f: f }
+  p 
+    = f.submit 'Редактировать',  class: "btn btn-success"
   
   

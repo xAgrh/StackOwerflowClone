@@ -1,18 +1,21 @@
-class AnswersController < ApplicationController
+class AnswersController < InheritedResources::Base
   before_action :authenticate_user!, only: [:new, :create, :update, :destroy]  
   
+  respond_to :js
+  
+  belongs_to :question
+  
   def create
-    @question = Question.find(params[:question_id])
-    @answer = @question.answers.build(answer_params)  
-    @answer.user = current_user
-    respond_to do |format|
-      if @answer.save
-        format.js
-        flash[:notice] = 'Вы успешно создали ответ.'
-      else
-        flash[:alert] = 'Ошибка при сохранении ответа'
+    
+    
+    create! do |success, failure|
+      success.js do
+	flash[:notice] = 'Вы успешно создали ответ.'
       end
+      
     end
+  
+  
     
      # if @answer.save
      #   format.html { render partial: 'questions/answers', layout: false }
@@ -22,22 +25,7 @@ class AnswersController < ApplicationController
      #   format.json { render json: @answer.errors.full_messages, status: :unprocessable_entity }
      # end
     
-  end
-  
-  def update
-    @answer = Answer.find(params[:id])
-    @answer.update(answer_params)
-    @question = @answer.question
-  end
-  
-  def edit
-    @answer = Answer.find(params[:id])
-    @question = @answer.question
-  end
-  
-  def index
-    @question = Question.find(params[:question_id])
-  end
+  end 
   
   def destroy
     @answer = Answer.find(params[:id])
@@ -47,7 +35,12 @@ class AnswersController < ApplicationController
     redirect_to question_path(@question)
   end
   
-  private 
+  protected
+  
+  def create_resource(object)
+    object.user = current_user
+    super
+  end
   
   def answer_params
     params.require(:answer).permit(:body, attachments_attributes: [:id, :file, :_destroy], comments_attributes: [:id, :body, :_destroy])
