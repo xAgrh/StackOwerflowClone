@@ -10,12 +10,9 @@ class AnswersController < InheritedResources::Base
     
     create! do |success, failure|
       success.js do
-	flash[:notice] = 'Вы успешно создали ответ.'
+        flash[:notice] = 'Вы успешно создали ответ.'
       end
-      
     end
-  
-  
     
      # if @answer.save
      #   format.html { render partial: 'questions/answers', layout: false }

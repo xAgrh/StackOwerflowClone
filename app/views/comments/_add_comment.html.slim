@@ -1,6 +1,6 @@
 .comment-errors 
 
-= form_for [@question, @comment], remote: true, data: { type: :json } do |f| 
+= form_for [resource, resource.comments.build], remote: true, data: { type: :json } do |f| 
   p  
     = f.label :body
     = f.text_area :body

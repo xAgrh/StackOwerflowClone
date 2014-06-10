@@ -1,5 +1,12 @@
-class CommentsController < ApplicationController
+class CommentsController < InheritedResources::Base
   before_action :authenticate_user!
+  
+  respond_to :html, :json
+  
+  actions :create
+  
+  belongs_to :question
+
   
   
   def create
@@ -26,7 +33,8 @@ class CommentsController < ApplicationController
     end
   end
  
-  private
+  protected
+  
     def comment_params
       params.require(:comment).permit(:body)
     end 
