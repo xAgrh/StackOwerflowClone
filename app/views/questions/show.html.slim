@@ -47,7 +47,7 @@ div class="row" class="bg-info" style="padding: 20px 20px 0px 20px"
         = link_to 'Удалить', question_path, :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить вопрос?'}, class: "btn btn-large btn-danger"
 
 .comments data={question_id: "#{resource.id}"}
-  = render 'comments/show_comments' 
+  = render 'comments/show_comments', parent: resource  
         
 div class="panel-group" id="accordion" style="margin-top:5px"
   div class="panel panel-info"
@@ -60,7 +60,7 @@ div class="panel-group" id="accordion" style="margin-top:5px"
         div id="collapseOne" class="panel-collapse collapse"
           div class="panel-body"
             .add_comment
-              = render 'comments/add_comment'    
+              = render 'comments/add_comment', parent: resource     
 
 
 

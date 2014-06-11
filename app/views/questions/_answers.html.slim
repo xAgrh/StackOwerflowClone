@@ -6,7 +6,7 @@
           img src="//static.copiny.com/images/user-small.png" alt=""
         div class="col-md-11"
           div class="bg-success" style="padding: 5px 0px 5px 15px"
-            = link_to answer.question.user.email
+            = link_to answer.user.email
             br
             = answer.created_at
 
@@ -23,12 +23,12 @@
           
             .edit-answer
              - if user_signed_in? && answer.user == current_user
-                = link_to 'Редактировать',edit_question_answer_path(answer.question, answer),remote: true
+                = link_to 'Редактировать', edit_question_answer_path(answer.question, answer), remote: true
                 ' |
                 = link_to 'Удалить', question_answer_path(@question, answer), :method => :delete, data: {:confirm => 'Вы уверены, что хотите удалить ответ?'}
 
       .comments_in_answer data={answer_id: "#{answer.id}"}
-        = render 'comments/show_comments_in_answer', answer: answer  
+        = render 'comments/show_comments', parent: answer  
         
     div class="panel-group" id="accordion" style="margin-top:5px"
      div class="panel panel-info"
@@ -41,7 +41,7 @@
         div id="#{"collapse" + id.to_s}" class="panel-collapse collapse"
           div class="panel-body"
             .add_comment_to_answer
-              = render 'comments/add_comment_to_answer', answer: answer   
+              = render 'comments/add_comment', parent: answer   
   
           
               

@@ -1,21 +1,22 @@
 class QuestionsController < InheritedResources::Base
   before_action :authenticate_user!, only: [:new, :create, :update, :delete]  
-  before_action :build_answer, only: :show
+  before_action :build_comment, only: :show
   before_action :build_attachment, only: :new
   before_action :build_tag, only: :new
   
   respond_to :html
-
+  def create
+    create!(notice: "Вы успешно создали вопрос.")
+  end
   
   protected
   
   def create_resource(object)
     object.user = current_user
-    #attachments
     super
   end
   
-  def build_answer
+  def build_comment
     @comment = resource.comments.build
     resource.tags.build
   end

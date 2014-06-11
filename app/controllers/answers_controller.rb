@@ -6,13 +6,9 @@ class AnswersController < InheritedResources::Base
   belongs_to :question
   
   def create
-    
-    
-    create! do |success, failure|
-      success.js do
-        flash[:notice] = 'Вы успешно создали ответ.'
-      end
-    end
+
+    create!(notice: "Вы успешно создали ответ.")
+
     
      # if @answer.save
      #   format.html { render partial: 'questions/answers', layout: false }
@@ -24,14 +20,7 @@ class AnswersController < InheritedResources::Base
     
   end 
   
-  def destroy
-    @answer = Answer.find(params[:id])
-    @question = @answer.question
-    @answer.destroy
-    flash[:notice] = 'Вы успешно удалили вопрос.'
-    redirect_to question_path(@question)
-  end
-  
+
   protected
   
   def create_resource(object)

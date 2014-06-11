@@ -7,12 +7,11 @@ feature 'Add comments to question', %q{
 } do
   
   given(:user){ create(:user) }  
-  given!(:question){ create(:question) }
+  given!(:question){ create(:question, user: user) }
   
   scenario "Authenticated user can comment question", js: true do
     sign_in(user)
     visit question_path(question)
-    
     
     click_on 'Комментировать вопрос'
     fill_in 'Поле', with: 'Комментарий1'
@@ -35,7 +34,7 @@ feature 'Add comments to answer', %q{
 } do
   
   given(:user){ create(:user) }  
-  given!(:question){ create(:question) }
+  given!(:question){ create(:question, user: user) }
   given!(:answer){ create(:answer, question: question) }
 
   

@@ -7,7 +7,7 @@ feature 'Answer editing', %q{
 } do
   
   given!(:users)    { create_pair(:user)}
-  given!(:question) { create(:question) }
+  given!(:question) { create(:question, user: users[0]) }
   given!(:answer1)  { create(:answer, question: question, user: users[0]) }
   given!(:answer2)  { create(:answer, question: question, user: users[1]) }
   
@@ -25,13 +25,15 @@ feature 'Answer editing', %q{
     end    
   
     scenario 'sees link to Edit his answer' do
+                
       within "#answer-#{answer1.id}" do
         expect(page).to have_link 'Редактировать'
       end
     end
     
     scenario 'try to cancel edit answer', js: true do
-      within "#answer-#{answer1.id} .edit-answer" do
+
+      within ".answers #answer-#{answer1.id} .edit-answer" do
 	click_on 'Редактировать'
         fill_in 'Ответ', with: 'Отредактировано'
         click_on 'Отмена'
@@ -42,16 +44,18 @@ feature 'Answer editing', %q{
     
   
     scenario 'try to edit his answer', js: true do
-      within "#answer-#{answer2.id} .edit-answer" do
+      save_and_open_page
+      within "#answer-#{answer1.id} .edit-answer" do
 	click_on 'Редактировать'
-        fill_in 'Ответ', with: 'Отредактировано'
+        fill_in 'Ответ', with: 'Исправлено'
         click_on 'Сохранить'
-        expect(page).to have_content 'Отредактировано'
       end
+      
       within "#answer-#{answer2.id} .edit-answer" do
-        expect(page).to_not have_content answer1.body
         expect(page).to_not have_selector 'textarea'
       end
+      
+      expect(page).to have_content 'Исправлено'
     end
   
   

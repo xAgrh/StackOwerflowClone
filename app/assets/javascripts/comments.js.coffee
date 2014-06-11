@@ -20,7 +20,7 @@ $ ->
     comment = $.parseJSON(data['comment'])
     $('.comments').append('<p>' + comment.body + '</p>')
     
-    
+  
 
   PrivatePub.subscribe '/questions/' + questionId + '/answers/comments', (data, channel) ->
     comment = $.parseJSON(data['comment'])

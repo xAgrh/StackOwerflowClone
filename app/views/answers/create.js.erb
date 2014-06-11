@@ -7,7 +7,9 @@
      $('.answers').html('<%= j render 'questions/answers', question: parent %>');               
   <% end %>
   $('.new_answer #answer_body').val('');
-                    
+  
+  $('body > .container').prepend('<div class="alert alert-success alert-dismissable"><button class="close" data-dismiss="alert" name="button" type="button">×</button>Вы успешно создали ответ.</div>')
+  
 
 <% end %>
 
