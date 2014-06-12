@@ -14,11 +14,13 @@ feature 'Add tags to question', %q{
   end
   
   scenario 'User adds tags when ask question' do
+    fill_in 'Title', with: 'Test question'
+    fill_in 'Text', with: 'text text text'
     fill_in 'Tag', with: 'Rails'
     
     click_on 'Create'
     
-    within '.questiontags' do
+    within '.question_tags' do
       expect(page).to have_link "Rails"
     end
   end

@@ -1,14 +1,13 @@
 class AnswersController < InheritedResources::Base
   before_action :authenticate_user!, only: [:new, :create, :update, :destroy]  
   
-  respond_to :js
+  respond_to :js, :html
   
   belongs_to :question
   
   def create
 
     create!(notice: "Вы успешно создали ответ.")
-
     
      # if @answer.save
      #   format.html { render partial: 'questions/answers', layout: false }
@@ -19,6 +18,11 @@ class AnswersController < InheritedResources::Base
      # end
     
   end 
+  
+  def destroy
+    destroy! { parent_url }
+  end
+  
   
 
   protected

@@ -92,11 +92,11 @@ describe AnswersController do
  
 
     it 'deletes answer' do
-      expect { delete :destroy, id: answer, question_id: question, format: :js }.to change(@user.answers, :count).by(-1)
+      expect { delete :destroy, id: answer, question_id: question }.to change(@user.answers, :count).by(-1)
     end
     
     it 'redirect to question show form' do
-      delete :destroy, id: answer, question_id: question, format: :js
+      delete :destroy, id: answer, question_id: question
       expect(response).to redirect_to question_path(question)
     end
   end

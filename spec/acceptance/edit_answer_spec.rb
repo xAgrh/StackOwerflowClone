@@ -33,8 +33,8 @@ feature 'Answer editing', %q{
     
     scenario 'try to cancel edit answer', js: true do
 
-      within ".answers #answer-#{answer1.id} .edit-answer" do
-	click_on 'Редактировать'
+      within "#answer-#{answer1.id}" do
+        click_on 'Редактировать'
         fill_in 'Ответ', with: 'Отредактировано'
         click_on 'Отмена'
         expect(page).to_not have_content 'Отредактировано'
@@ -44,14 +44,15 @@ feature 'Answer editing', %q{
     
   
     scenario 'try to edit his answer', js: true do
-      save_and_open_page
-      within "#answer-#{answer1.id} .edit-answer" do
-	click_on 'Редактировать'
+      
+      within "#answer-#{answer1.id}" do
+        click_on 'Редактировать'
         fill_in 'Ответ', with: 'Исправлено'
         click_on 'Сохранить'
+
       end
       
-      within "#answer-#{answer2.id} .edit-answer" do
+      within ".answers #answer-#{answer2.id} .edit-answer" do
         expect(page).to_not have_selector 'textarea'
       end
       
@@ -59,7 +60,7 @@ feature 'Answer editing', %q{
     end
   
   
-    scenario "try to edit other user's question", js: true  do
+    scenario "user dont see edit link"  do
       visit question_path(question)
       
       within "#answer-#{answer2.id}" do

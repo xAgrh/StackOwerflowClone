@@ -35,7 +35,7 @@ feature 'Add comments to answer', %q{
   
   given(:user){ create(:user) }  
   given!(:question){ create(:question, user: user) }
-  given!(:answer){ create(:answer, question: question) }
+  given!(:answer){ create(:answer, question: question, user: user) }
 
   
   scenario "Authenticated user can comment answer", js: true do
