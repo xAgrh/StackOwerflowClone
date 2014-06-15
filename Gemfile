@@ -37,7 +37,7 @@ gem 'select2-rails'
 gem 'private_pub'
 gem 'thin'
 gem 'inherited_resources'
-
+gem 'simple_form'
 
 group :test, :developement do
   gem "rspec-rails", "~> 2.8"

@@ -11,6 +11,8 @@ header class="navbar navbar-inverse navbar-fixed-top" role="navigation"
           span style="color: white"
             | Signed in as 
             = current_user.email 
+          span
+            = link_to "Profile", edit_user_registration_path, class: "btn btn-info" 
           span 
             |
           = link_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-danger"
