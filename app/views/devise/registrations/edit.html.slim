@@ -1,0 +1,38 @@
+h2
+  'Edit 
+  = resource_name.to_s.humanize
+
+= simple_form_for(setup_ext_attr(resource), as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-horizontal' }) do |f| 
+  = devise_error_messages!
+
+  = f.input :email, autofocus: true
+
+  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+    | Currently waiting confirmation for: 
+    = resource.unconfirmed_email 
+  
+
+  = f.input :password, autocomplete: "off"
+
+  = f.input :password_confirmation, autocomplete: "off"
+
+  = f.simple_fields_for :profile do |field|
+    = field.input :nickname
+    = field.input :website
+    = field.input :location
+    = field.input :birthday, as: :string
+    = field.input :about_me
+    / :avatar
+    
+  = f.input :current_password, autocomplete: "off"
+  
+  = f.button :submit 
+
+
+h3 Cancel my account
+
+p
+  'Unhappy?
+  = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete 
+
+= link_to "Back", :back

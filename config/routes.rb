@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   root "questions#index"
 
-  devise_for :users
+  devise_for :users, :controllers => { registrations: 'registrations' }
   
   concern :commentable do 
     resource :comments
