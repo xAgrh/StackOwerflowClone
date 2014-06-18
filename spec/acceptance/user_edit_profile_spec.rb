@@ -22,9 +22,8 @@ feature 'User edit his profile', %q(
       fill_in 'Nickname', with: 'Ololo'
       fill_in 'Current password', with: user.password
       click_on 'Сохранить User'
-      click_on 'Profile'
       
-      expect(page).to have_content 'Ololo'
+      expect(page).to have_content 'Ваша учётная запись изменена.'
     end
 
   end
