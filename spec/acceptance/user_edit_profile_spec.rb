@@ -8,6 +8,7 @@ feature 'User edit his profile', %q(
     given!(:user) { create :user }
 
     scenario 'Guest not see link to edit profile' do
+      
       visit questions_path
 
       expect(page).to_not have_link 'Profile', href: edit_user_registration_path
