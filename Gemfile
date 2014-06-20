@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass'
@@ -47,7 +48,8 @@ group :test, :developement do
   gem 'guard-rspec'
   gem 'spring-commands-rspec'
   gem 'childprocess', '0.3.6'
-  gem 'libnotify', '0.8.0'
+  gem 'libnotify' if /linux/ =~ RUBY_PLATFORM
+  gem 'growl' if /darwin/ =~ RUBY_PLATFORM
   gem 'database_cleaner'
   gem 'capybara-webkit'
   
