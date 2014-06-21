@@ -14,4 +14,6 @@ class User < ActiveRecord::Base
   
   accepts_nested_attributes_for :profile
   
+  delegate :nickname, to: :profile
+  
 end
