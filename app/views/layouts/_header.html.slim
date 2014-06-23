@@ -12,8 +12,8 @@ header class="navbar navbar-inverse navbar-fixed-top" role="navigation"
             | Signed in as 
             = current_user.email
           span
-            - if current_user.profile.nickname != ""
-              = link_to current_user.profile.nickname, edit_user_registration_path, class: "btn btn-info" 
+            - if current_user.nickname != ""
+              = link_to current_user.nickname, edit_user_registration_path, class: "btn btn-info" 
             - else
               = link_to "Profile", edit_user_registration_path, class: "btn btn-info"
           span 
