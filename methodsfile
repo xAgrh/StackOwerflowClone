@@ -1,0 +1,7 @@
+database.password = passw0rd 
+database.type = cassandra 
+database.cassandra.keyspace = production 
+some.email.settings = true 
+some.email.host = localhost 
+new_option = 42  
+
