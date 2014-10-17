@@ -286,7 +286,7 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap-sass-extras
   capybara
-  capybara-webkit
+  capybara-webkit (= 1.3.0)
   carrierwave
   childprocess (= 0.3.6)
   coffee-rails (~> 4.0.0)
