@@ -40,6 +40,8 @@ gem 'thin'
 gem 'inherited_resources'
 gem 'simple_form'
 
+gem 'capybara-webkit', '1.3.0'
+
 group :test, :developement do
   gem "rspec-rails", "~> 2.8"
   gem 'factory_girl_rails'
