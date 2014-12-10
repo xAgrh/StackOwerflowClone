@@ -52,7 +52,7 @@ group :test, :developement do
 #  gem 'libnotify' if /linux/ =~ RUBY_PLATFORM
   gem 'growl'    # if /darwin/ =~ RUBY_PLATFORM
   gem 'database_cleaner'
-  gem 'capybara-webkit', '1.3.0' 
+#  gem 'capybara-webkit', '1.3.0'
   
 end
 
